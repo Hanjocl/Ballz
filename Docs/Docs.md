@@ -131,11 +131,11 @@ We want to calculate the required pendulum mass \(M_{\rm pend}\) to roll a hollo
 
 ##### **step 0: Given Parameters**
 
-- Mass of hollow sphere: \(M_{\rm sphere} = 6\ \text{kg}\)  
-- Radius of sphere: \(R = 0.45\ \text{m}\)  
-- Pendulum lever arm: \(L = 0.30\ \text{m}\)  
-- Desired ball speed: \(v = 1\ \text{m/s}\)  
-- Gravitational acceleration: \(g = 9.81\ \text{m/s²}\)  
+- Mass of hollow sphere: $M_{\rm sphere} = 6\ \rm kg$  
+- Radius of sphere: $R = 0.45\ \rm m$  
+- Pendulum lever arm: $L = 0.30\ \rm m$  
+- Desired ball speed: $v = 1\ \rm m/s$  
+- Gravitational acceleration: $g = 9.81\ \rm m/s^2$
 
 
 ##### **Step 1: Calculate Ball Kinetic Energy**
@@ -173,13 +173,14 @@ $$
 
 ##### **Given Parameters**
 
-- Mass of hollow sphere: \(M_{\rm sphere} = 6\ \text{kg}\)  
-- Pendulum lever arm: \(L = 0.30\ \text{m}\)  
-- Desired ball speed: \(v = 1\ \text{m/s}\)  
-- Gravitational acceleration: \(g = 9.81\ \text{m/s²}\)  
-- Desired pendulum angular acceleration: \(\alpha = 3.7\ \text{rad/s²}\) (example)  
-- Maximum pendulum angle from vertical: \(\theta = 90^\circ = \pi/2\) rad  
-- Safety factor: \(SF = 1.5\)  
+- Mass of hollow sphere: $M_{\rm sphere} = 6\ \rm kg$  
+- Pendulum lever arm: $L = 0.30\ \rm m$  
+- Desired ball speed: $v = 1\ \rm m/s$  
+- Gravitational acceleration: $g = 9.81\ \rm m/s^2$  
+- Desired pendulum angular acceleration: $\alpha = 3.7\ \rm rad/s^2$ (example)  
+- Maximum pendulum angle from vertical: $\theta = 90^\circ = \pi/2\ \rm rad$  
+- Safety factor: $SF = 1.5$
+
 
 ---
 
