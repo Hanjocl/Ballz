@@ -8,51 +8,51 @@ _Keep in mind this is a very simplified version of reality. For example the pend
 - `v` = Desired speed (m/s) 
 
 #### The total kinetic energy of ball:
-\[
+$$
 E_{\text{kin}} = \frac{1}{2} M_{\text{sphere}} v^2 + \frac{1}{2} I \omega^2
-\]
+$$
 
 with, rolling ball without slipping:
-\[
+$$
 \omega = \frac{v}{R}
-\]
+$$
 and, for hollow sphere:
-\[
+$$
 I = \frac{2}{3} M_{\text{sphere}} R^2
-\]
+$$
 
 ---
 ##### Simplified formula
 
-\[
+$$
 E_{\text{kin}} = \frac{1}{2} M_{\text{sphere}} v^2 + \frac{1}{2} \left(\frac{2}{3} M_{\text{sphere}} R^2\right) \left(\frac{v}{R}\right)^2
-\]
+$$
 
-\[
+$$
 \boxed{E_{\text{kin}} = \frac{5}{6} M_{\text{sphere}} v^2}
-\]
+$$
 
 ---
 #### Potential energy for pendulum
-\[
+$$
 E_{\text{pend}} = M g r
-\]
+$$
 
 ---
 ##### Solve for M of pendulum
-\[
+$$
 E_{\text{pend}} = E_{\text{kin}}
-\]
+$$
 
-\[
+$$
 M g r = \frac{5}{6} M_{\text{sphere}} v^2
-\]
+$$
 
 ---
 ##### Solving for M of pendulum
-\[
+$$
 M = \frac{\frac{5}{6} M_{\text{sphere}} v^2}{g r}
-\]
+$$
 
 ---
 
@@ -67,56 +67,56 @@ The motor will require a certain torque to move the given mass and arm of the pe
 
 > Maximum linear acceleration of the ball:
 
-\[
+$$
 a_{\rm ball, max} = \frac{\tau_{\rm pend,max} \cdot R}{I_{\rm ball} + M R^2} 
 = \frac{m g L \cdot R}{\frac{2}{3} M R^2 + M R^2} 
 = \frac{3 m g L}{5 M R}
-\]
+$$
 
 - `θ_max` = Maximum angular displacement from vertical (rad)  
 - `SF` = Safety factor (typically 1.5–2)
 
 #### **Step 1: Moment of Inertia**
 For a point mass at the end of a massless rod:
-\[
+$$
 I = m \cdot L^2
-\]
+$$
 
 
 #### **Step 2: Torque due to Angular Acceleration**
-\[
+$$
 \tau_\text{inertia} = I \cdot \alpha = m L^2 \alpha
-\]
+$$
 
 ---
 
 #### **Step 3: Torque due to Gravity**
-\[
+$$
 \tau_\text{gravity} = m \cdot g \cdot L \cdot \sin\theta
-\]
+$$
 
 - Maximum torque occurs at horizontal position:  
-\[
+$$
 \tau_\text{gravity, max} = m g L
-\]
+$$
 
 ---
 
 #### **Step 4: Total Torque Required**
-\[
+$$
 \tau_\text{total} = \tau_\text{inertia} + \tau_\text{gravity} = m L^2 \alpha + m g L \sin\theta
-\]
+$$
 
 ---
 
 #### **Step 5: Torque with Safety Factor**
-\[
+$$
 \tau_\text{motor} = \text{SF} \cdot \tau_\text{total} 
-\]
+$$
 
-\[
+$$
 \tau_\text{motor} = \text{SF} \cdot ( m L^2 \alpha + m g L \sin\theta_\text{max} )
-\]
+$$
 
 ---
 # Example calculation
@@ -136,15 +136,15 @@ We want to calculate the required pendulum mass \(M_{\rm pend}\) to roll a hollo
 
 ##### **Step 1: Calculate Ball Kinetic Energy**
 Using:
-\[
+$$
 E_{\text{kin}} = \frac{5}{6} M_{\text{sphere}} v^2
-\]
+$$
 
 plug in numbers:
 
-\[
+$$
 E_{\rm kin} = \frac{5}{6} \cdot 6 \cdot 1^2 = 5.0\ \text{J}
-\]
+$$
 
 ---
 
@@ -152,15 +152,15 @@ E_{\rm kin} = \frac{5}{6} \cdot 6 \cdot 1^2 = 5.0\ \text{J}
 
 Maximum potential energy of the pendulum:
 
-\[
+$$
 E_{\rm pend} = M_{\rm pend} g L
-\]
+$$
 
 Set \(E_{\rm pend} = E_{\rm kin}\) to provide enough energy:
 
-\[
+$$
 M_{\rm pend} = \frac{E_{\rm kin}}{g L} = \frac{5.0}{9.81 \cdot 0.30} \approx 1.70\ \text{kg}
-\]
+$$
 
 ---
 
@@ -182,25 +182,25 @@ M_{\rm pend} = \frac{E_{\rm kin}}{g L} = \frac{5.0}{9.81 \cdot 0.30} \approx 1.7
 
 Using the total torque formula:
 
-\[
+$$
 \tau_\text{total} = \tau_\text{inertia} + \tau_\text{gravity}
-\]
+$$
 
-\[
+$$
 \tau_\text{total} = m L^2 \alpha + m g L \sin\theta
-\]
+$$
 
-\[
+$$
 \tau_{\rm total} = 1.70 \cdot 0.30^2 \cdot 3.7 + 1.70 \cdot 9.81 \cdot 0.30 \approx 5.565 \text{Nm}
-\]
+$$
 
 ---
 
 ##### **Step 4: Apply Safety Factor**
 
-\[
+$$
 \tau_\text{motor} = SF \cdot \tau_\text{total} = 1.5 \cdot 5.57 \approx 8.36\ \text{Nm}
-\]
+$$
 
 ---
 
