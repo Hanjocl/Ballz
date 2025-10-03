@@ -16,6 +16,7 @@ with, rolling ball without slipping:
 $$
 \omega = \frac{v}{R}
 $$
+
 and, for hollow sphere:
 $$
 I = \frac{2}{3} M_{\text{sphere}} R^2
