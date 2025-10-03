@@ -35,14 +35,20 @@ $$
 \boxed{E_{\text{kin}} = \frac{5}{6} M_{\text{sphere}} v^2}
 $$
 
+This formula allows us to calculate the energy required to move the ball by rotation for a given total **mass** and **speed** of the ball.
+
 ---
 #### Potential energy for pendulum
+The pendulum must be able to match energy required by the ball kinetic energy. For this we want to know the weight it needs to be for a given arm.
+
 $$
 E_{\text{pend}} = M g r
 $$
 
 ---
-##### Solve for M of pendulum
+#### Solve for M of pendulum
+Equal both formulas to get one the can be used to calculate the mass required of the pendulum.
+
 $$
 E_{\text{pend}} = E_{\text{kin}}
 $$
@@ -56,6 +62,8 @@ $$
 $$
 M = \frac{\frac{5}{6} M_{\text{sphere}} v^2}{g r}
 $$
+
+This forumula allows us to calculate the weight at the end of the pendulum for a **target speed**, **weight of ball** and **arm length of pendulum**.
 
 ---
 
@@ -121,6 +129,8 @@ $$
 $$
 \tau_\text{motor} = \text{SF} \cdot ( m L^2 \alpha + m g L \sin\theta_\text{max} )
 $$
+
+Adding a safety factor is crucial because of motor and mechanical efficiency losses!
 
 ---
 # Example calculation
