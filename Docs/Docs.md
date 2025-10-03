@@ -132,6 +132,58 @@ $$
 
 Adding a safety factor is crucial because of motor and mechanical efficiency losses!
 
+## Taking rotational speed into account
+Besides torque, our motor will need to hit a certain RPM to keep up with the velocity of the ball. This can be calculated using the pendulum's rotational kinetic energy and solve for `w`
+
+#### The pendulum’s rotational kinetic energy is:
+
+$$
+E_{\rm pend,rot} = \frac{1}{2} I \omega_{\rm pend}^2
+$$
+
+with, for point mass at a massless rot
+
+$$
+I = M_{\rm pend} L^2
+$$
+
+becomes:
+
+$$
+E_{\rm pend,rot} = \frac{1}{2} M_{\rm pend} L^2 \omega_{\rm pend}^2
+$$
+
+#### Pendulum energy is fully transferred to kinetic energy
+
+$$
+E_{\rm pend,rot} = E_{\rm kin}
+$$
+
+Substitute $E_{\rm pend,rot}$:
+
+$$
+\frac{1}{2} M_{\rm pend} L^2 \omega_{\rm pend}^2 = E_{\rm kin}
+$$
+
+Solve symbolically for $\omega_{\rm pend}$:
+
+$$
+\omega_{\rm pend} = \sqrt{\frac{2 E_{\rm kin}}{M_{\rm pend} L^2}}
+$$
+
+> This formula gives the **angular speed the pendulum must reach** to supply the required kinetic energy to the ball, independent of the specific numbers.
+
+#### Convert to RPM:
+We want to convert to RPM as this is can be used to check if the motor specs meet demand
+$$
+\text{RPM} = \frac{60}{2 \pi} \, \omega_{\rm pend}
+$$
+
+$$
+\text{RPM} = \frac{60}{2 \pi} \sqrt{\frac{2 E_{\rm kin}}{M_{\rm pend} L^2}}
+$$
+
+
 ---
 # Example calculation
 We want to calculate the required pendulum mass \(M_{\rm pend}\) to roll a hollow sphere to a desired speed.
@@ -139,7 +191,7 @@ We want to calculate the required pendulum mass \(M_{\rm pend}\) to roll a hollo
 ---
 ## Calculate kinetic energy required
 
-##### **step 0: Given Parameters**
+##### **Step 0: Given Parameters**
 
 - Mass of hollow sphere: $M_{\rm sphere} = 6\ \rm kg$  
 - Radius of sphere: $R = 0.45\ \rm m$  
@@ -152,13 +204,13 @@ We want to calculate the required pendulum mass \(M_{\rm pend}\) to roll a hollo
 Using:
 
 $$
-E_{\text{kin}} = \frac{5}{6} M_{\text{sphere}} v^2
+E_{\rm kin} = \frac{5}{6} M_{\rm sphere} v^2
 $$
 
-plug in numbers:
+Plug in numbers:
 
 $$
-E_{\rm kin} = \frac{5}{6} \cdot 6 \cdot 1^2 = 5.0\ \text{J}
+E_{\rm kin} = \frac{5}{6} \cdot 6 \cdot 1^2 = 5.0\ \rm J
 $$
 
 ---
@@ -174,7 +226,7 @@ $$
 Set \(E_{\rm pend} = E_{\rm kin}\) to provide enough energy:
 
 $$
-M_{\rm pend} = \frac{E_{\rm kin}}{g L} = \frac{5.0}{9.81 \cdot 0.30} \approx 1.70\ \text{kg}
+M_{\rm pend} = \frac{E_{\rm kin}}{g L} = \frac{5.0}{9.81 \cdot 0.30} \approx 1.70\ \rm kg
 $$
 
 ---
@@ -191,7 +243,6 @@ $$
 - Maximum pendulum angle from vertical: $\theta = 90^\circ = \pi/2\ \rm rad$  
 - Safety factor: $SF = 1.5$
 
-
 ---
 
 ##### **Step 3: Calculate Total Torque Required**
@@ -207,7 +258,7 @@ $$
 $$
 
 $$
-\tau_{\rm total} = 1.70 \cdot 0.30^2 \cdot 3.7 + 1.70 \cdot 9.81 \cdot 0.30 \approx 5.565 \text{Nm}
+\tau_{\rm total} = 1.70 \cdot 0.30^2 \cdot 3.7 + 1.70 \cdot 9.81 \cdot 0.30 \approx 5.565\ \rm N \cdot m
 $$
 
 ---
@@ -215,8 +266,40 @@ $$
 ##### **Step 4: Apply Safety Factor**
 
 $$
-\tau_\text{motor} = SF \cdot \tau_\text{total} = 1.5 \cdot 5.57 \approx 8.36\ \text{Nm}
+\tau_\text{motor} = SF \cdot \tau_\text{total} = 1.5 \cdot 5.565 \approx 8.35\ \rm N \cdot m
 $$
+
+---
+
+##### **Step 5: Pendulum Angular Speed**
+
+The pendulum’s angular speed to deliver the kinetic energy:
+
+$$
+\frac{1}{2} M_{\rm pend} L^2 \omega_{\rm pend}^2 = E_{\rm kin}
+$$
+
+Solve for $\omega_{\rm pend}$:
+
+$$
+\omega_{\rm pend} = \sqrt{\frac{2 E_{\rm kin}}{M_{\rm pend} L^2}} = \sqrt{\frac{2 \cdot 5.0}{1.70 \cdot 0.30^2}} \approx 8.09\ \rm rad/s
+$$
+
+Convert to RPM:
+
+$$
+\text{RPM} = \frac{60}{2 \pi} \omega_{\rm pend} = \frac{60}{2 \pi} \cdot 8.09 \approx 77\ \rm RPM
+$$
+
+> This gives the **angular speed the pendulum motor must achieve** to supply the required energy to the ball.
+
+---
+
+## **Results**
+
+- Required pendulum mass: $M_{\rm pend} \approx 1.70\ \rm kg$  
+- Required motor torque with safety factor: $\tau_{\rm motor} \approx 8.35\ \rm N \cdot m$  
+- Required pendulum angular speed: $\omega_{\rm pend} \approx 8.09\ \rm rad/s$ (~77 RPM)
 
 ---
 
