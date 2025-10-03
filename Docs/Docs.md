@@ -13,11 +13,13 @@ E_{\text{kin}} = \frac{1}{2} M_{\text{sphere}} v^2 + \frac{1}{2} I \omega^2
 $$
 
 with, rolling ball without slipping:
+
 $$
 \omega = \frac{v}{R}
 $$
 
 and, for hollow sphere:
+
 $$
 I = \frac{2}{3} M_{\text{sphere}} R^2
 $$
@@ -79,6 +81,7 @@ $$
 
 #### **Step 1: Moment of Inertia**
 For a point mass at the end of a massless rod:
+
 $$
 I = m \cdot L^2
 $$
@@ -137,6 +140,7 @@ We want to calculate the required pendulum mass \(M_{\rm pend}\) to roll a hollo
 
 ##### **Step 1: Calculate Ball Kinetic Energy**
 Using:
+
 $$
 E_{\text{kin}} = \frac{5}{6} M_{\text{sphere}} v^2
 $$
