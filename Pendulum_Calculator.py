@@ -16,7 +16,7 @@ def sphere_I(M_sphere, D):
     I = (2/3) * M_sphere * R**2
     return I
 
-def calculate_pendulum_mass(M_sphere, D, L, v_ball, theta_deg):
+def calculate_pendulum_mass(theta_deg, M_sphere=M_sphere, D=D, L=L, v_ball=v_ball):
     '''Calculate the minimum pendulum mass required to achieve a target ball speed.
     Function uses energy conservation and rotational dynamics principles, assuming no energy losses.
     Inputs:
@@ -29,7 +29,9 @@ def calculate_pendulum_mass(M_sphere, D, L, v_ball, theta_deg):
     M_pend   : Minimum pendulum mass (kg)
 
     '''
+   
     theta_rad = np.radians(theta_deg)
+
     E_kin_v = (5/6) * M_sphere * v_ball**2
     E_kin_rot = 0.5 * sphere_I(M_sphere, D) * (v_ball / (D/2))**2
 
@@ -38,7 +40,7 @@ def calculate_pendulum_mass(M_sphere, D, L, v_ball, theta_deg):
     M_pend = E_kin / (9.81 * L * np.sin(theta_rad))
     return M_pend
 
-def calculate_pendulum_torque(M_sphere, D, L, theta_deg, M_pend, v_ball, SF=1.5):
+def calculate_pendulum_torque(theta_deg, M_pend, M_sphere=M_sphere, D=D, L=L, v_ball=v_ball, SF=1.5):
     '''Calculate the torque exerted by the pendulum on the motor shaft, the ball's acceleration, and the motor RPM, assumes no losses.
     Inputs:
     M_sphere : Mass of the sphere (kg)
@@ -57,7 +59,7 @@ def calculate_pendulum_torque(M_sphere, D, L, theta_deg, M_pend, v_ball, SF=1.5)
     theta_rad = np.radians(theta_deg)
 
 
-    tau_motor_array = SF + M_pend * 9.81 * L * np.sin(theta_rad)
+    tau_motor_array = SF * M_pend * 9.81 * L * np.sin(theta_rad)
     a_ball_array = (3 * tau_motor_array) / (5 * M_sphere * R)
     omega_motor_array = v_ball / R
     rpm_motor_array = (omega_motor_array * 60) / (2 * np.pi)
@@ -65,23 +67,20 @@ def calculate_pendulum_torque(M_sphere, D, L, theta_deg, M_pend, v_ball, SF=1.5)
     return tau_motor_array, a_ball_array, rpm_motor_array
 
 
-def print_table(title, angles, M_sphere, D, L, M_pend, v_ball):
-    print(f"\n=== {title} ===")
-    print(f"{'Angle (deg)':>12} | {'Torque (N·m)':>15} | {'Ball Accel (m/s²)':>20} | {'Motor RPM':>10}")
-    print("-" * 65)
-    for angle in angles:
-        tau, a, rpm = calculate_pendulum_torque(M_sphere, D, L, angle, M_pend, v_ball)
-        print(f"{angle:12.1f} | {tau:15.3f} | {a:20.3f} | {rpm:10.3f}")
+
+m_pend_array = np.array(calculate_pendulum_mass(theta_deg=np.arange(10, 60, 1)))
+
+m_pend_array_generated = np.linspace(min(m_pend_array), max(m_pend_array), 100)
+tau_array_opt = np.array(calculate_pendulum_torque(theta_deg=np.arange(10, 60, 1), M_pend=m_pend_array)[0])
+rpm_array_opt = np.array(calculate_pendulum_torque(theta_deg=np.arange(10, 60, 1), M_pend=m_pend_array)[2])
 
 # --- Example usage ---
 if __name__ == "__main__":
 
-
+    
     angles = np.arange(10, 60, 1)
-    m_pend_array = np.array(calculate_pendulum_mass(M_sphere, D, L, v_ball, angles) )
 
-    m_pend_array_generated = np.linspace(min(m_pend_array), max(m_pend_array), 100)
-    tau_array_opt = np.array(calculate_pendulum_torque(M_sphere, D, L, angles, M_pend=m_pend_array, v_ball=v_ball)[0] )
+    print(tau_array_opt[0])
 
     tau_matrix = np.zeros((len(m_pend_array_generated), len(angles)))
 
@@ -91,6 +90,7 @@ if __name__ == "__main__":
 
     # Replace the previous 1x2 subplot block with a 1x3 layout:
     fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(18, 6))
+
 
     ax1.plot(angles, m_pend_array)
     ax1.set_xlabel("Angle (deg)")
