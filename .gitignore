@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Python cache files
 __pycache__/
 *.pyc
@@ -47,3 +48,6 @@ coverage.xml
 # Environment variable files
 .env
 .env.*
+=======
+/venv/*
+>>>>>>> d70050d88f61570149acdefb87b91e02ea222e28
