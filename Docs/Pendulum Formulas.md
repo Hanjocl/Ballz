@@ -8,9 +8,9 @@ This document provides explanations for all formulas used in designing a motor-s
 
 The total kinetic energy of a rolling hollow sphere:
 
-\[
-E_{\rm kin} = \frac{1}{2} M_{\rm sphere} v^2 + \frac{1}{2} I \omega^2
-\]
+$$
+E_{\mathrm{kin}} = \frac{1}{2} M_{\mathrm{sphere}} v^2 + \frac{1}{2} I \omega^2
+$$
 
 Where:
 - $M_{\mathrm{sphere}}$ = mass of the hollow sphere  
