@@ -80,10 +80,11 @@ if __name__ == "__main__":
     angles = np.arange(10, 60, 1)
     m_pend_array = np.array(calculate_pendulum_mass(M_sphere, D, L, v_ball, angles) )
 
-    m_pend_array_generated = np.linspace(0.5, 15, 15)
+    m_pend_array_generated = np.linspace(min(m_pend_array), max(m_pend_array), 100)
     tau_array_opt = np.array(calculate_pendulum_torque(M_sphere, D, L, angles, M_pend=m_pend_array, v_ball=v_ball)[0] )
 
     tau_matrix = np.zeros((len(m_pend_array_generated), len(angles)))
+
     for i, m_pend in enumerate(m_pend_array_generated):
         for j, angle in enumerate(angles):
             tau_matrix[i, j], _, _ = calculate_pendulum_torque(M_sphere, D, L, angle, m_pend, v_ball)
