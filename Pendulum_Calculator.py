@@ -111,6 +111,9 @@ if __name__ == "__main__":
     ax3.set_title("Torque vs Angle and Pendulum Mass")
     fig.colorbar(cax, ax=ax3, label="Torque (N·m)")
 
+    ax3.plot(angles, m_pend_array, color='red', linewidth=2, label="Minimum Pendulum Mass")
+    ax3.legend()
+
 
 
     plt.tight_layout()
