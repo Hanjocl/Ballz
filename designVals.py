@@ -13,7 +13,7 @@ design_torque = 10.5 # [Nm]
 
 #Power
 V_nom = 24 # [Volts]
-desired_run_time = 60*4  # [minutes]
+desired_run_time = 60*2  # [minutes]
 
 
 #Motor Data
@@ -32,7 +32,7 @@ motor_data = {
     ],
     "Torque (kg)": torque_lst,
     "KV (RPM/V)":  kv_lst,
-    "Gear ratio (Nm/A)": gear_ratio_lst,  # Assuming current ratings
+    "Gear ratio ": gear_ratio_lst,  # Assuming current ratings
     "Torque with gear ratio": torque_gear_lst,
     "Max RPM": max_rpm_lst,
     "Price (€)": [117.71, 15.80, 55.77, 37.34, None]  # None for missing value
@@ -41,7 +41,7 @@ motor_data = {
 pd_motor = pd.DataFrame(motor_data)
 
 
-
+# power data
 battery_data = [
     {"name": "18650 Li-ion (NMC/NCA)", "nominal_voltage_V": 3.6,  "capacity_Ah": 3.0, "max_continuous_discharge_A": 15},
     {"name": "21700 Li-ion (NMC/NCA)", "nominal_voltage_V": 3.6,  "capacity_Ah": 4.8, "max_continuous_discharge_A": 25},

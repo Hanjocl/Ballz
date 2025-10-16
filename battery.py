@@ -7,21 +7,21 @@ from matplotlib import pyplot as plt
 
 ''' Estimation on power requirements and respective capacity required'''
 
-# def estimate_current(torque, rpm, V, eff_motor, eff_esc, run_time_min):
-#     '''TBD'''
-#     return P_out, P_in, I_in, capacity_Ah
+
 
 def battery_sizing(I_nom, V_nom, max_discharge_sys, max_discharge_batt, battV, battC, run_time_min):
     '''Estimate cells in series and parallel per battery pack and total number of packs.'''
     # Cells 
     Nseries = np.ceil(V_nom / battV)
-    Nparallel = np.ceil(max_discharge_sys / max_discharge_batt)
+    Nparallel = 1
 
     cellsperpack = Nseries * Nparallel
     # Packs
     reqC = I_nom*run_time_min/60/0.8  # [Ah]
     
-    total_packs = np.ceil(reqC / (Nparallel * battC))
+    option1 = np.ceil(reqC / (Nparallel * battC))
+    option2 = np.ceil(max_discharge_sys / (max_discharge_batt ))*Nseries
+    total_packs = np.maximum(option1, option2)
 
     total_cells = total_packs * Nparallel * Nseries
     return cellsperpack, total_packs, reqC, total_cells
@@ -78,29 +78,51 @@ def battery_comparison(pd_battery, V_nom, I_nom, run_time_min):
 
 
 if __name__ == "__main__":
-    battery_comparison(pd_battery, V_nom, 2, desired_run_time)
+    # battery_comparison(pd_battery, V_nom, 2, desired_run_time)
 
-    # I_nom = np.linspace(1, 10, 100)  # [Ah]
+    I_nom = np.linspace(1, 10, 100)  # [Ah]
 
+    # Define a color palette using a colormap
+    colors = plt.get_cmap('tab10').colors
 
-    # cellsperpack, total_packs, total_Ah, total_cells = battery_sizing(I_nom, V_nom, 5, 3.7, 3.3, desired_run_time)
+    # For each battery in the dataframe, generate separate subplots in multiple columns.
+    n_batteries = pd_battery.shape[0]
+    n_cols = 2 if n_batteries > 1 else 1
+    n_rows = int(np.ceil(n_batteries / n_cols))
+    
+    fig, axs = plt.subplots(n_rows, n_cols, figsize=(12 * n_cols, 5 * n_rows), constrained_layout=True)
+    # Flatten axs array for easier indexing, even if it's a single row or single subplot.
+    if n_batteries > 1:
+        axs = np.array(axs).flatten()
+    else:
+        axs = [axs]
+    
+    for i, (_, row) in enumerate(pd_battery.iterrows()):
+        cellsperpack, total_packs, total_Ah, total_cells = battery_sizing(
+            I_nom,
+            V_nom,
+            80,  # system's max discharge (adjust as needed)
+            row["max_continuous_discharge_A"],
+            row["nominal_voltage_V"],
+            row["capacity_Ah"],
+            desired_run_time  # ensure desired_run_time is defined
+        )
 
-    # plt.figure(figsize=(10, 5))
-
-    # plt.subplot(1, 2, 1) 
-    # plt.plot(I_nom, total_packs, marker='o')
-    # plt.xlabel("Nominal Current (Ah)")
-    # plt.ylabel("Total Packs")
-    # plt.title("Total Packs vs Nominal Current")
-
-    # plt.subplot(1, 2, 2)
-    # plt.plot(I_nom, total_cells, marker='o', color="orange")
-    # plt.xlabel("Nominal Current (Ah)")
-    # plt.ylabel("Total Cells")
-    # plt.title("Total Cells vs Nominal Capacity")
-
-    # plt.tight_layout()
-    # plt.show()
+        battery_label = row.get("battery_name", row.get("name", "Unnamed"))
+        
+        ax = axs[i]
+        # Choose a different color for each subplot
+        color = colors[i % len(colors)]
+        ax.plot(I_nom, total_cells, marker='o', color=color)
+        ax.set_xlabel("Nominal Current (A)")
+        ax.set_ylabel("Total Cells")
+        ax.set_title(f"{battery_label}: Total Cells vs Nominal Current (Cells per Pack: {int(cellsperpack)})")
+    
+    # Remove any unused subplots
+    for j in range(i + 1, len(axs)):
+        fig.delaxes(axs[j])
+        
+    plt.show()
 
 
     
