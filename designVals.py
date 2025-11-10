@@ -13,7 +13,7 @@ design_torque = 10.5 # [Nm]
 
 #Power
 V_nom = 24 # [Volts]
-desired_run_time = 60*2  # [minutes]
+desired_run_time = 60  # [minutes]
 
 
 #Motor Data
@@ -43,11 +43,11 @@ pd_motor = pd.DataFrame(motor_data)
 
 # power data
 battery_data = [
-    {"name": "18650 Li-ion (NMC/NCA)", "nominal_voltage_V": 3.6,  "capacity_Ah": 3.0, "max_continuous_discharge_A": 15},
-    {"name": "21700 Li-ion (NMC/NCA)", "nominal_voltage_V": 3.6,  "capacity_Ah": 4.8, "max_continuous_discharge_A": 25},
-    {"name": "26650 LiFePO4",          "nominal_voltage_V": 3.2,  "capacity_Ah": 3.3, "max_continuous_discharge_A": 25},
-    {"name": "32700 LiFePO4",          "nominal_voltage_V": 3.2,  "capacity_Ah": 6.0, "max_continuous_discharge_A": 25},
-    {"name": "LTO cylindrical",        "nominal_voltage_V": 2.3,  "capacity_Ah": 20.0,"max_continuous_discharge_A": 200},
+    # {"name": "18650 Li-ion (NMC/NCA)", "nominal_voltage_V": 3.6,  "capacity_Ah": 3.0, "max_continuous_discharge_A": 15},
+    # {"name": "21700 Li-ion (NMC/NCA)", "nominal_voltage_V": 3.6,  "capacity_Ah": 4.8, "max_continuous_discharge_A": 25},
+    # {"name": "26650 LiFePO4",          "nominal_voltage_V": 3.2,  "capacity_Ah": 3.3, "max_continuous_discharge_A": 25},
+    # {"name": "32700 LiFePO4",          "nominal_voltage_V": 3.2,  "capacity_Ah": 6.0, "max_continuous_discharge_A": 25},
+    # {"name": "LTO cylindrical",        "nominal_voltage_V": 2.3,  "capacity_Ah": 20.0,"max_continuous_discharge_A": 200},
 
     {"name": "LiPo 2S (7.4V) 2200mAh 30C",  "nominal_voltage_V": 7.4,  "capacity_Ah": 2.2, "max_continuous_discharge_A": 66},
     {"name": "LiPo 3S (11.1V) 2200mAh 30C", "nominal_voltage_V": 11.1, "capacity_Ah": 2.2, "max_continuous_discharge_A": 66},

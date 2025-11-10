@@ -84,9 +84,9 @@ if __name__ == "__main__":
 
     tau_matrix = np.zeros((len(m_pend_array_generated), len(angles)))
 
-    for i, m_pend in enumerate(m_pend_array_generated):
-        for j, angle in enumerate(angles):
-            tau_matrix[i, j], _, _ = calculate_pendulum_torque(M_sphere, D, L, angle, m_pend, v_ball)
+    for i in range(len(m_pend_array_generated)):
+        for j in range(len(angles)):
+            tau_matrix[i, j], _, _ = calculate_pendulum_torque(theta_deg=angles[j], M_pend=m_pend_array_generated[i], M_sphere=M_sphere, D=D, L=L, v_ball=v_ball)
 
     # Replace the previous 1x2 subplot block with a 1x3 layout:
     fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(18, 6))
